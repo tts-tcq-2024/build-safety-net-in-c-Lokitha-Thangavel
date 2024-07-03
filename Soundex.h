@@ -1,24 +1,25 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
-#include "Soundex.h"
 #include <ctype.h>
 #include <string.h>
 
 char getSoundexCode(char c) {
-    c = toupper(c);
-    switch (c) {
-        case 'B': case 'F': case 'P': case 'V': return '1';
-        case 'C': case 'G': case 'J': case 'K': case 'Q': case 'S': case 'X': case 'Z': return '2';
-        case 'D': case 'T': return '3';
-        case 'L': return '4';
-        case 'M': case 'N': return '5';
-        case 'R': return '6';
-        default: return '0'; // For A, E, I, O, U, H, W, Y
+    static const char codeMap[26] = {
+        '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', '0', '0', '0', '2', '0', '2'
+    };
+    if (isalpha(c)) {
+        return codeMap[toupper(c) - 'A'];
     }
+    return '0';
 }
 
 void generateSoundex(const char *name, char *soundex) {
+    if (name[0] == '\0') {
+        strcpy(soundex, "0000");
+        return;
+    }
+
     int len = strlen(name);
     soundex[0] = toupper(name[0]);
     int sIndex = 1;
