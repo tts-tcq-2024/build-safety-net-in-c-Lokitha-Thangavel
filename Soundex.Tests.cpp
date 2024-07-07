@@ -28,13 +28,13 @@ TEST(SoundexTestsuite, HandlesSingleCharacterString) {
 TEST(SoundexTestsuite, HandlesAlreadyCodedString) {
     char soundex[5];
     generateSoundex("BFPV", soundex);
-    ASSERT_STREQ(soundex, "B100");
+    ASSERT_STREQ(soundex, "B000");
 }
 
 TEST(SoundexTestsuite, HandlesDifferentSoundexCodesForSameChar) {
     char soundex[5];
     generateSoundex("CGJKQSXZ", soundex);
-    ASSERT_STREQ(soundex, "C222");
+    ASSERT_STREQ(soundex, "C000");
 }
 
 TEST(SoundexTestsuite, HandlesVowelCharacters) {
@@ -46,7 +46,7 @@ TEST(SoundexTestsuite, HandlesVowelCharacters) {
 TEST(SoundexTestsuite, HandlesMultipleSameSoundexCodeCharacters) {
     char soundex[5];
     generateSoundex("TTTT", soundex);
-    ASSERT_STREQ(soundex, "T300");
+    ASSERT_STREQ(soundex, "T000");
 }
 
 TEST(SoundexTestsuite, HandlesDifferentSoundexCodes) {
