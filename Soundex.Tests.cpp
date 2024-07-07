@@ -55,6 +55,13 @@ TEST(SoundexTestsuite, HandlesDifferentSoundexCodes) {
     ASSERT_STREQ(soundex, "A123");
 }
 
+
+TEST(SoundexTestsuite, RandomCase) {
+    char soundex[5];
+    generateSoundex("Broccoli", soundex);
+    ASSERT_STREQ(soundex, "B624");
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
