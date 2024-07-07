@@ -17,6 +17,15 @@ char getSoundexCode(char c)
     return '0';
 }
 
+void checkBlankWord(const char *name, char *soundex) 
+{
+    if (name[0] == '\0') 
+    {
+        strcpy(soundex, "0000");
+        return;
+    }
+}
+
 void padWithZeros(char *soundex, int startIndex) 
 {
     while (startIndex < 4) 
@@ -28,11 +37,7 @@ void padWithZeros(char *soundex, int startIndex)
 
 void generateSoundex(const char *name, char *soundex)
 {
-    if (name[0] == '\0')
-    {
-        strcpy(soundex, "0000");
-        return;
-    }
+    checkBlankWord(name,soundex);
     
     soundex[0] = toupper(name[0]);
     int sIndex = 1;
