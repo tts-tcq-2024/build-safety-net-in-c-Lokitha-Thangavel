@@ -17,12 +17,12 @@ char getSoundexCode(char c)
     return '0';
 }
 
-void CheckAndAddChar(char *soundex, int *sIndex, char code, char prevCode) 
+void CheckAndAddChar(char *soundex, int *sIndex, char code, char *prevCode) 
 { 
-    if (code != '0' && code != prevCode) 
+    if (code != '0' && code != *prevCode) 
     {
         soundex[(*sIndex)++] = code;
-        prevCode = code;
+        *prevCode = code;
     }
 }
 
@@ -32,7 +32,7 @@ void processRemainingChars(const char *name, char *soundex, int *sIndex)
     for (int i = 1; name[i] != '\0' && *sIndex < 4; i++) 
     {
         char code = getSoundexCode(name[i]);
-        CheckAndAddChar(soundex, sIndex, code, prevCode);
+        CheckAndAddChar(soundex, sIndex, code, &prevCode);
     }
 }
 
