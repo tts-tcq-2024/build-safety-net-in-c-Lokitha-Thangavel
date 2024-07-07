@@ -26,17 +26,22 @@ void checkBlankWord(const char *name, char *soundex)
     }
 }
 
+void CheckAndAddChar(char *soundex, int *sIndex, char code, char prevCode) 
+{ 
+    if (code != '0' && code != prevCode) 
+    {
+        soundex[(*sIndex)++] = code;
+        prevCode = code;
+    }
+}
+
 void processRemainingChars(const char *name, char *soundex, int *sIndex) 
 {
     char prevCode = getSoundexCode(soundex[0]);
     for (int i = 1; name[i] != '\0' && *sIndex < 4; i++) 
     {
         char code = getSoundexCode(name[i]);
-        if (code != '0' && code != prevCode) 
-        {
-            soundex[(*sIndex)++] = code;
-            prevCode = code;
-        }
+        CheckAndAddChar(soundex, sIndex, code, prevCode);
     }
 }
 
