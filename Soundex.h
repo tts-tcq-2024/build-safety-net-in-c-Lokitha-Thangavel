@@ -28,6 +28,7 @@ void checkBlankWord(const char *name, char *soundex)
 
 void processRemainingChars(const char *name, char *soundex, int *sIndex) 
 {
+    char prevCode = getSoundexCode(soundex[0]);
     for (int i = 1; name[i] != '\0' && *sIndex < 4; i++) 
     {
         char code = getSoundexCode(name[i]);
@@ -55,7 +56,7 @@ void generateSoundex(const char *name, char *soundex)
     
     soundex[0] = toupper(name[0]);
     int sIndex = 1;
-    char prevCode = getSoundexCode(soundex[0]);
+    
 
     processRemainingChars(name, soundex, &sIndex);
     padWithZeros(soundex, sIndex);    
